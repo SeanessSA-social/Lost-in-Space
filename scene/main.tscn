@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=13 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4q088qgb18dj" path="res://assets/Textures/Background_blue.png" id="7_tqoya"]
 [ext_resource type="PackedScene" uid="uid://dyb3usbe1j0q5" path="res://scene/journey.tscn" id="10_tqoya"]
 [ext_resource type="AudioStream" uid="uid://ng1j5l82ovx5" path="res://assets/Audio/Matooma - First Step on Mars.wav" id="11_k65ib"]
+[ext_resource type="VideoStream" uid="uid://d3js40q4yqr56" path="res://assets/P1_P2_P4_3_2_1.ogv" id="11_wscrc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -53,6 +54,14 @@ volume_db = -3.0
 autoplay = true
 
 [node name="journey" parent="." instance=ExtResource("10_tqoya")]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -16.0
+offset_top = -9.0
+offset_right = 1311.0
+offset_bottom = 744.0
+stream = ExtResource("11_wscrc")
+expand = true
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]

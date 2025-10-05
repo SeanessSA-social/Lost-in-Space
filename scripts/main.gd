@@ -8,6 +8,8 @@ extends Node
 # XX
 @onready var hud = $HUD
 @onready var ship = $Spaceship
+@onready var video_stream_player: VideoStreamPlayer = $VideoStreamPlayer
+
 var planet_levels=[]
 var space_levels=[]
 var score
@@ -82,6 +84,10 @@ func _on_spaceship_crash() -> void:
 
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
 	print("succesful landing on planet ",planet_id," with ",current_lives," current lives") 
+	if is_instance_valid(video_stream_player) and video_stream_player.stream:
+		video_stream_player.loop = false
+		video_stream_player.play()
+		await video_stream_player.finished	# wait until the video ends
 	if current_lives == 2:
 		get_tree().call_deferred("change_scene_to_file","res://scene/intro_scene.tscn")
 	else:
