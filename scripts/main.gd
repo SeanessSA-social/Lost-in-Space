@@ -98,6 +98,15 @@ func _cutscene_path(planet_id: String, current_lives: int) -> String:
 
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
 	print("successful landing on planet ", planet_id, " with ", current_lives, " current lives")
+	
+	var player = $Spaceship
+	var hud = $HUD
+
+	if player:
+		player.hide()
+	if hud:
+		hud.hide()
+	
 
 	# Load and play the appropriate cutscene
 	var cut_path := _cutscene_path(planet_id, current_lives)
@@ -107,9 +116,7 @@ func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
 		video_stream_player.stream = stream
 		video_stream_player.play()
 		await video_stream_player.finished
-
+		get_tree().change_scene_to_file("res://scene/game_over.tscn")
+		
 	# Proceed based on lives after the video finishes (or immediately if no stream)
-	if current_lives == 2:
-		get_tree().call_deferred("change_scene_to_file", "res://scene/intro_scene.tscn")
-	else:
-		get_tree().call_deferred("change_scene_to_file", "res://scene/game_over.tscn")
+	
