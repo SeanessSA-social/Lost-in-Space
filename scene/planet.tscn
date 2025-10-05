@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://scene/Planet_proximity.gd" id="2_y3myt"]
 [ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
 [ext_resource type="Texture2D" uid="uid://d1cwc3unlvsgb" path="res://assets/Textures/Planets/Planet1.png" id="3_vvgff"]
-[ext_resource type="Texture2D" uid="uid://0t05vawtfqkq" path="res://assets/Textures/Planets/Planet2.png" id="6_vvgff"]
 [ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
-[ext_resource type="Texture2D" uid="uid://conigaiu033nc" path="res://assets/Textures/Planets/Planet3.png" id="7_vvgff"]
+[ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/Textures/Planets/mercury.png" id="7_y3myt"]
+[ext_resource type="Texture2D" uid="uid://b7ooxck6vcnm6" path="res://assets/Textures/Planets/saturn.png" id="8_x5iud"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
 radius = 157.385
@@ -49,7 +49,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_vvgff")
+"texture": ExtResource("7_y3myt")
 }],
 "loop": true,
 "name": &"mercury",
@@ -57,7 +57,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_vvgff")
+"texture": ExtResource("8_x5iud")
 }],
 "loop": true,
 "name": &"saturn",
@@ -89,7 +89,7 @@ shape = SubResource("CircleShape2D_u71er")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"venus"
+animation = &"mercury"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.50273
@@ -101,4 +101,5 @@ rect = Rect2(-240, -197, 436, 392)
 metadata/_edit_group_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -266,7 +266,7 @@ func generate_planet(name,scale,start_time,pos=Vector2(50,-self.screen_size.y),d
 	saturn.setplanet(name)
 	saturn.reshape(scale)
 	add_child(self.field_scene.instantiate().init(saturn,pos,dir,speed,0,0,start_time,1,variance,Svar))
-	
+	return saturn
 	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -202,7 +202,7 @@ func _say_health_lost() -> void:
 	if dlg == null:
 		push_error("could not load dialogue:res://Dialogue/health_loss.dialogue ")
 		
-	var balloon := DialogueManager.show_dialogue_balloon(dlg, "start")
+	#var balloon := DialogueManager.show_dialogue_balloon(dlg, "start")
 
 
 	

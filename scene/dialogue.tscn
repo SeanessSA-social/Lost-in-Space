@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://c544crmjbwlce"]
+
+[ext_resource type="Script" uid="uid://bqbos8lhtwnoo" path="res://scene/dialogue.gd" id="1_gxfc3"]
+[ext_resource type="Texture2D" uid="uid://dk2xavhi2mm76" path="res://assets/Textures/SpaceBackground_Suerza_2.png" id="1_ilexf"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gxfc3"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("1_ilexf")
+
+[node name="dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gxfc3")
+metadata/_edit_group_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.04
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 405.0
+offset_bottom = 81.0
+texture = SubResource("CanvasTexture_gxfc3")
+
+[node name="content" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 474.0
+offset_bottom = 252.0
+bbcode_enabled = true
+text = "This is a test"
+scroll_active = false
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

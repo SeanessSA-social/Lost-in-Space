@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://3r8r1yvx0vc0"]
+[gd_scene load_steps=9 format=3 uid="uid://3r8r1yvx0vc0"]
 
 [ext_resource type="Script" uid="uid://bu8mv4ymhucf1" path="res://scripts/asteroid.gd" id="1_gktfr"]
 [ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_gktfr"]
 [ext_resource type="Texture2D" uid="uid://cip4txmnbstc0" path="res://assets/Textures/a_3.t.png" id="2_xkyx0"]
 [ext_resource type="Texture2D" uid="uid://cbr44x2hefba5" path="res://assets/Textures/a_2.t.png" id="4_xkyx0"]
 [ext_resource type="Texture2D" uid="uid://l7nyo4w0rsni" path="res://assets/Textures/Asteriod and Comets/Asteroid 1.PNG" id="5_uo68c"]
+[ext_resource type="Texture2D" uid="uid://411ek21cqfgo" path="res://assets/Textures/Planets/asteroid.png" id="6_njqjp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -39,6 +40,22 @@ animations = [{
 "loop": true,
 "name": &"fall4",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_njqjp")
+}],
+"loop": true,
+"name": &"fall_orig",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uo68c"]
@@ -62,7 +79,7 @@ animation = &"fall4"
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5999167, 0.5)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"fall4"
+animation = &"off"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5707964

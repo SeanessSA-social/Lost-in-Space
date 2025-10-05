@@ -17,7 +17,7 @@ func play(start_time=0):
 	generate_field(comet_scene,$left,PI/8,100,1,8,8,1)
 	generate_field(comet_scene,$right,PI,200,0.5,8,21,1)
 	generate_field(asteroid_scene,Vector2(500+self.screen_size.x,self.screen_size.y/3),PI,75,8,30,19,1,Vector2(0,400))
-	generate_field(saturn,Vector2(50,-self.screen_size.y),PI/2,30,0,0,5,1,Vector2(100,0),Vector2(0.9,1.1))
+	#generate_field(saturn,Vector2(50,-self.screen_size.y),PI/2,30,0,0,5,1,Vector2(100,0),Vector2(0.9,1.1))
 	generate_field(self.comet_scene,$up,PI/2,300,0.5,8,31,3)
 	generate_field(self.comet_scene,Vector2.ZERO,PI/4,300,0.5,8,37,4,Vector2(300,0))
 	#add_child(self.field_scene.instantiate().init(self.comet_scene,Vector2(self.screen_size.x/2,0),PI-PI/4,300,0.5,8,45,4,Vector2(1000,0)))
