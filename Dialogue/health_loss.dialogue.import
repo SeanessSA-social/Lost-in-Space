@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://esn0mty2taxl"
+path="res://.godot/imported/health_loss.dialogue-89f9397128a97dcbaf1d39e6a8bf558f.tres"
+
+[deps]
+
+source_file="res://Dialogue/health_loss.dialogue"
+dest_files=["res://.godot/imported/health_loss.dialogue-89f9397128a97dcbaf1d39e6a8bf558f.tres"]
+
+[params]
+
+defaults=true

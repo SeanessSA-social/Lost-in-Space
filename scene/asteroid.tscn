@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_gktfr"]
 [ext_resource type="Texture2D" uid="uid://cip4txmnbstc0" path="res://assets/Textures/a_3.t.png" id="2_xkyx0"]
 [ext_resource type="Texture2D" uid="uid://cbr44x2hefba5" path="res://assets/Textures/a_2.t.png" id="4_xkyx0"]
-[ext_resource type="Texture2D" uid="uid://411ek21cqfgo" path="res://assets/Textures/Planets/asteroid.png" id="5_uo68c"]
+[ext_resource type="Texture2D" uid="uid://l7nyo4w0rsni" path="res://assets/Textures/Asteriod and Comets/Asteroid 1.PNG" id="5_uo68c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -54,6 +54,12 @@ script = ExtResource("1_gktfr")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.196167e-05, 12.000008)
+scale = Vector2(1.021875, 0.6037037)
+sprite_frames = SubResource("SpriteFrames_squbt")
+animation = &"fall4"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5999167, 0.5)
 sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall4"

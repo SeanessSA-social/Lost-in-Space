@@ -1,15 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj4ogd8kn1elh"]
+[gd_scene load_steps=12 format=3 uid="uid://cj4ogd8kn1elh"]
 
 [ext_resource type="Script" uid="uid://b8mtrabrl6xg" path="res://scripts/planet.gd" id="1_ohpux"]
-[ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/Textures/Planets/mercury.png" id="2_ataao"]
 [ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/Textures/Planets/earth.png" id="2_u71er"]
+[ext_resource type="Texture2D" uid="uid://d0g2t5hruvq0p" path="res://assets/Textures/Planets/neptune.png" id="2_vvgff"]
+[ext_resource type="Script" uid="uid://biewcqphg8mvc" path="res://scene/Planet_proximity.gd" id="2_y3myt"]
 [ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
 [ext_resource type="Texture2D" uid="uid://d1cwc3unlvsgb" path="res://assets/Textures/Planets/Planet1.png" id="3_vvgff"]
-[ext_resource type="Texture2D" uid="uid://b7ooxck6vcnm6" path="res://assets/Textures/Planets/saturn.png" id="6_l5gcb"]
+[ext_resource type="Texture2D" uid="uid://0t05vawtfqkq" path="res://assets/Textures/Planets/Planet2.png" id="6_vvgff"]
 [ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
+[ext_resource type="Texture2D" uid="uid://conigaiu033nc" path="res://assets/Textures/Planets/Planet3.png" id="7_vvgff"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
+radius = 157.38487
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vvgff")
+}],
+"loop": true,
+"name": &"Suerza",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_u71er")
@@ -36,7 +49,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ataao")
+"texture": ExtResource("6_vvgff")
 }],
 "loop": true,
 "name": &"mercury",
@@ -44,7 +57,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_l5gcb")
+"texture": ExtResource("7_vvgff")
 }],
 "loop": true,
 "name": &"saturn",
@@ -59,9 +72,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
-radius = 157.38487
-
 [node name="planet" type="RigidBody2D" groups=["comets2", "planet"]]
 collision_layer = 32
 mass = 1000.0
@@ -69,9 +79,17 @@ gravity_scale = 0.0
 inertia = 1000.0
 script = ExtResource("1_ohpux")
 
+[node name="Proximity" type="Area2D" parent="."]
+script = ExtResource("2_y3myt")
+
+[node name="Dialogue Collisions" type="CollisionShape2D" parent="Proximity"]
+rotation = 1.5027285
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_u71er")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"earth2"
+animation = &"saturn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5027285

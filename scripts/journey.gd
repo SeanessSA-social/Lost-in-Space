@@ -31,16 +31,19 @@ func play_journey():
 	#await simple_level3()
 	var rlevel
 	var custom_collection=[intro_level,simple_level1]
+	
 	await play_level($tutorial)
-	await intro_level()
+	
+	#level 1 -mercury
 	await play_level($random_level.make_easy(1))
-	await simple_level1()
+	await random_simple()
 	await play_level($random_level2.make_easy(1))
 	rlevel=sl.pop_front()
 	await play_level(rlevel)
-	print(space_levels)
 	await mercury()
-	await intro_level()
+	await simple_level4()
+	
+	#level 2 - mars & venus
 	await play_level($random_level.make_easy(1))
 	await simple_level1()
 	await play_level($random_level2.make_easy(1))
@@ -49,26 +52,56 @@ func play_journey():
 	await mars_venus()
 	await simple_level3()
 	
-	for i in range(0,1):
-		await play_level($random_level2.make_easy(2))
-		await play_level($random_level.make_easy(2))
-		rlevel=sl.pop_front()
-		await play_level(rlevel)
-		rlevel=space_levels.pick_random()
-		await play_level(rlevel)
+	
+	#level 3 - earth
+	await play_level($random_level.make_easy(2))
 	rlevel=sl.pop_front()
 	await play_level(rlevel)
+	await play_level($random_level2.make_easy(2))
+	rlevel=sl.pop_front()
+	await play_level(rlevel)
+	
+	
+	await earth()
+	await intro_level()
+	
+	#level 4 - Suerza
+	for i in range(0,1):
+		await play_level($random_level2.make_normal(2))
+		rlevel=space_levels.pick_random()
+		await play_level(rlevel)
+		await play_level($random_level.make_normal(2))
 	await simple_level2()
-
+	await Suerza()
+	
+	#endless mode (no one would last 30 mins of this)
+	for i in range(0,10):
+		await random_simple()
+		await play_level($random_level2.make_normal(2))
+		rlevel=space_levels.pick_random()
+		await play_level(rlevel)
+		await play_level($random_level.make_normal(2))
+	
+func random_simple(start_time=0):
+	var c=randi_range(0,1)
+	if c==0:
+		intro_level(start_time)
+	else:
+		simple_level1(start_time)
 func mars_venus(start_time=0):
 	level_duration=5
 	generate_planet("venus" ,1.5,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/2,40,Vector2(100,0),Vector2(0.75,1.5))
 	generate_planet("mars" ,1.6,start_time+0,Vector2(1180,-self.screen_size.y/2-100),PI/2,30,Vector2(100,0),Vector2(0.75,1.5))
-	return level_duration
-func mercury(start_time=0):
+	await get_tree().create_timer(level_duration).timeout
+func Suerza(start_time=0):
+	level_duration=50
+	generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-900),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
+	await get_tree().create_timer(level_duration).timeout
+
+func earth(start_time=0):
 	level_duration=5
-	generate_planet("mercury" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
-	return level_duration
+	generate_planet("earth" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
+	await get_tree().create_timer(level_duration).timeout
 func simple_level2(start_time=0):
 	set_flip()
 	level_duration=30
@@ -91,6 +124,29 @@ func simple_level2(start_time=0):
 	#generate_field(comet_scene,Vector2(100,-100),PI/2,400,0.2,4,start_time+1,3,Vector2(100,0))
 	await get_tree().create_timer(level_duration).timeout
 	
+func simple_level4(start_time=0):
+	set_flip()
+	level_duration=10
+	var huge_asteroid=self.asteroid_scene.instantiate()
+	huge_asteroid.reshape(1.5)
+	huge_asteroid.rotation+=0
+	huge_asteroid.change_collision()
+	generate_field(comet_scene,Vector2(+100,Y+100),-PI/3,150,0.6,1,start_time+1,3,Vector2(25,0))
+	generate_field(comet_scene,Vector2(+100,Y+100),-PI/3,400,0.1,4,start_time+1.5,7,Vector2(25,0))
+	if randi_range(0,1)==0:
+		generate_field(comet_scene,Vector2(+300,Y+100),-PI/4,150,0.6,1,start_time+4,3,Vector2(25,0))
+		generate_field(comet_scene,Vector2(+300,Y+100),-PI/4,400,0.1,4,start_time+4.5,7,Vector2(25,0))
+	generate_field(huge_asteroid,Vector2(-400,100),PI/5.5,170,0,0,start_time+2.5,1,Vector2(0,50),Vector2(0.8,1.3))
+	if randi_range(0,1)==0:
+		generate_field(comet_scene,Vector2(X+100,360),PI,85,0.6,8,0,2,Vector2(0,360))
+	
+	
+	await get_tree().create_timer(level_duration).timeout
+func mercury(start_time=0):
+	level_duration=4
+	generate_planet("mercury" ,1.8,start_time+0,Vector2(X+400,-400),PI/2+PI/6,120,Vector2(100,100),Vector2(0.9,1.2))
+	await get_tree().create_timer(level_duration).timeout
+	
 func simple_level3(start_time=0):
 	set_flip()
 	level_duration=16
@@ -101,7 +157,7 @@ func simple_level3(start_time=0):
 	await get_tree().create_timer(level_duration).timeout 
 func simple_level1(start_time=0):
 	set_flip()
-	level_duration=12
+	level_duration=14
 	var huge_asteroid=self.asteroid_scene.instantiate()
 	huge_asteroid.reshape(3)
 	huge_asteroid.rotation+=0
@@ -114,7 +170,7 @@ func simple_level1(start_time=0):
 
 
 func intro_level(start_time=0):
-	level_duration=30
+	level_duration=25
 	set_flip()
 	print("begin intro level")
 	#generate_field(comet_scene,$CometPath,3*PI/4,200,0.4,25,0,3)
@@ -124,9 +180,9 @@ func intro_level(start_time=0):
 	huge_asteroid.reshape(1.1)
 	huge_asteroid.rotation+=PI
 	huge_asteroid.change_collision()
-	generate_field(comet_scene,Vector2(730,-200),3*PI/4,200,0.6,25,0,3,Vector2(700,0))
-	generate_field(comet_scene,Vector2(1280+200,280),3*PI/4,200,0.6,25,0,3,Vector2(0,370))
-	generate_field(asteroid_scene,Vector2(-100,200),PI/50,100,6,23,6,1,Vector2(0,100))
-	generate_field(huge_asteroid,Vector2(1280+200,250),PI+PI/50,80,0,0,16,1,Vector2(0,150))
+	generate_field(comet_scene,Vector2(730,-200),3*PI/4,200,0.6,20,0,3,Vector2(700,0))
+	generate_field(comet_scene,Vector2(1280+200,280),3*PI/4,200,0.6,20,0,3,Vector2(0,370))
+	generate_field(asteroid_scene,Vector2(-100,200),PI/50,120,5.5,19,6,1,Vector2(0,100))
+	generate_field(huge_asteroid,Vector2(1280+200,250),PI+PI/50,100,0,0,14,1,Vector2(0,150))
 	await get_tree().create_timer(level_duration).timeout
 	return level_duration

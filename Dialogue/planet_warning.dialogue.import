@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://r1nimr4kxlkm"
+path="res://.godot/imported/planet_warning.dialogue-c3de5da22f9efdb14d5486410daed687.tres"
+
+[deps]
+
+source_file="res://Dialogue/planet_warning.dialogue"
+dest_files=["res://.godot/imported/planet_warning.dialogue-c3de5da22f9efdb14d5486410daed687.tres"]
+
+[params]
+
+defaults=true
