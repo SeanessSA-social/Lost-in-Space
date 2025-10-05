@@ -10,6 +10,9 @@ extends Node
 @onready var ship = $Spaceship
 @onready var video_stream_player: VideoStreamPlayer = $VideoStreamPlayer
 
+const CUT_DIR := "res://assets/CutScenes/"
+const DEFAULT_CUT := "P1_P2_P4_3_2_1.ogv"
+
 var planet_levels=[]
 var space_levels=[]
 var score
@@ -82,13 +85,31 @@ func _on_spaceship_crash() -> void:
 	print("death") # Replace with function body.
 
 
+func _cutscene_path(planet_id: String, current_lives: int) -> String:
+	var id := planet_id.to_lower()
+	var life := clampi(current_lives, 1, 3)
+	match id:
+		"earth", "earth2":
+			return CUT_DIR + "P3_%d.ogv" % life
+		"Suerza":
+			return CUT_DIR + "P5_%d.ogv" % life
+		_:
+			return CUT_DIR + DEFAULT_CUT
+
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
-	print("succesful landing on planet ",planet_id," with ",current_lives," current lives") 
-	if is_instance_valid(video_stream_player) and video_stream_player.stream:
+	print("successful landing on planet ", planet_id, " with ", current_lives, " current lives")
+
+	# Load and play the appropriate cutscene
+	var cut_path := _cutscene_path(planet_id, current_lives)
+	var stream := load(cut_path)
+	if is_instance_valid(video_stream_player) and stream:
 		video_stream_player.loop = false
+		video_stream_player.stream = stream
 		video_stream_player.play()
-		await video_stream_player.finished	# wait until the video ends
+		await video_stream_player.finished
+
+	# Proceed based on lives after the video finishes (or immediately if no stream)
 	if current_lives == 2:
-		get_tree().call_deferred("change_scene_to_file","res://scene/intro_scene.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scene/intro_scene.tscn")
 	else:
-		get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")# Replace with function body.
+		get_tree().call_deferred("change_scene_to_file", "res://scene/game_over.tscn")
