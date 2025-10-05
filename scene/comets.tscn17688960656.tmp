@@ -1,0 +1,150 @@
+[gd_scene load_steps=10 format=3 uid="uid://dp48tk7ctl8s2"]
+
+[ext_resource type="Script" uid="uid://s5wkpl15f5v2" path="res://scripts/comets.gd" id="1_6u7rb"]
+[ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_adq4h"]
+[ext_resource type="Texture2D" uid="uid://cbr44x2hefba5" path="res://assets/Textures/a_2.t.png" id="2_fanve"]
+[ext_resource type="Texture2D" uid="uid://brh70mt5eajwg" path="res://assets/Textures/free-explosion-transparent-pictures-6.png" id="3_2msnu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fanve")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2msnu")
+}],
+"loop": true,
+"name": &"explode2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_adq4h")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_adq4h")
+}],
+"loop": true,
+"name": &"fall2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0iu1"]
+radius = 15.0
+
+[sub_resource type="Animation" id="Animation_i6bdh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_43gvs"]
+resource_name = "Reset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_50cf8"]
+_data = {
+&"RESET": SubResource("Animation_i6bdh"),
+&"explode": SubResource("Animation_43gvs")
+}
+
+[node name="comet" type="RigidBody2D" groups=["comets2"]]
+collision_layer = 2
+collision_mask = 141
+mass = 2.0
+gravity_scale = 0.0
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_6u7rb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+rotation = 2.35619
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_squbt")
+animation = &"explode2"
+
+[node name="explode" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+rotation = 2.35619
+sprite_frames = SubResource("SpriteFrames_squbt")
+animation = &"fall2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 2)
+shape = SubResource("CircleShape2D_m0iu1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-18, -18, 40, 40)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_50cf8")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

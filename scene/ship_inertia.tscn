@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjaut5mhy6hog"]
+
+[ext_resource type="Script" uid="uid://ces6rqtic0faf" path="res://ship_inertia.gd" id="1_j0brc"]
+[ext_resource type="Texture2D" uid="uid://j4e8hjrw81d6" path="res://assets/Spaceship.png" id="2_ngbpx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_j0brc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ngbpx")

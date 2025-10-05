@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqjottjwj5cv1"]
+
+[ext_resource type="Texture2D" uid="uid://b4vhfpdfyfb51" path="res://assets/Textures/background/space_background_1.png" id="1_1fknq"]
+[ext_resource type="PackedScene" path="res://scene/ship_inertia.tscn" id="2_yb3jy"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BackGround" type="ParallaxBackground" parent="."]
+
+[node name="Layer" type="ParallaxLayer" parent="BackGround"]
+position = Vector2(361, 291)
+motion_mirroring = Vector2(0, 2558)
+
+[node name="Space" type="Sprite2D" parent="BackGround/Layer"]
+position = Vector2(-0.999985, 349)
+rotation = -1.5708
+scale = Vector2(0.666167, 0.667829)
+texture = ExtResource("1_1fknq")
+
+[node name="Layer2" type="ParallaxLayer" parent="BackGround"]
+position = Vector2(361, 1570)
+motion_mirroring = Vector2(0, 2558)
+
+[node name="Space" type="Sprite2D" parent="BackGround/Layer2"]
+position = Vector2(-0.999985, 349)
+rotation = -1.5708
+scale = Vector2(0.666167, 0.667829)
+texture = ExtResource("1_1fknq")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_yb3jy")]
+position = Vector2(364, 643)
+max_speed = 400.0
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(-4, -2)
+limit_left = 0
+limit_right = 720
+position_smoothing_speed = 16.0
