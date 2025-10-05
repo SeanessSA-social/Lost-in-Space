@@ -2,6 +2,8 @@ class_name level_collection extends level
 var planet_levels=[]
 var space_levels=[]
 
+@export var dialog_box= load("res://scene/dialogue.tscn")
+@onready var b=display_dialog()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready() # Replace with function body.
@@ -12,11 +14,39 @@ func _ready() -> void:
 		if child is space_level:
 			space_levels.append(child)
 
-
+func display_dialog():
+	var box=dialog_box.instantiate()
+	add_child(box)
+	box.showtext()
+	return box
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	super._process(delta)
 	
+	
+func level0():
+	b.push_message("[color=red]Pilot, why did you take us out of the wormhole?[/color]")
+	b.push_message("[color=cyan]It's the computer, Captain, it detects obstacles on our path[/color]")
+	b.push_message("[color=red]Then we must be close. Take control Pilot, the future of our people is in your hands[/color]")
+	await await get_tree().create_timer(2).timeout
+func react_to_planet(id):
+	if id=="saturn":
+		b.push_message("[color=cyan]What is that?[/color]")
+		b.push_message("[color=red]It is not EC218. Stay clear of its gravitational pull, we don’t have the fuel to escape it should it seize Genesis. Move too close and we will be stranded forever.[/color]")
+	if id=="mercury":
+		b.push_message("[color=cyan]That was…close, but the ship will not survive much longer. We have to land… now![/color]")
+		b.push_message("[color=red]No, not until we reach EC218. It is our best chance at rebuilding our civilization. Our lives don't matter if the mission is unsuccessful.[/color]")
+	if id=="mars":
+		b.push_message("[color=cyan]That's it, we are landing here, whatever these godforsaken planets may be, one of them will have to do[/color]")
+		b.push_message("[color=red]Never! Disobey me, and you will be landing with a parachute[/color]")
+	if id=="earth":
+		b.push_message("[color=cyan]Captain, my wife is onboard. I cannot put this ship through another asteroid field, this is madness, it is suicide. Let me land. Please.[/color]")
+		b.push_message("[color=red]Pilot, the last hope of our people, are onboard. You will not doom it to an inhospitable planet out of fear, it is cowardice, it is genocide.[/color]")
+	if id=="Suerza":
+		b.push_message("[color=cyan]Is this… I don't believe it[/color]")
+		b.push_message("[color=red]That's EC218 pilot, we are home.[/color]")
+	
+
 func play_level(level1):
 	level1.play()
 	await get_tree().create_timer(level1.level_duration).timeout
@@ -29,9 +59,12 @@ func play_journey():
 	#is called first, replace with level you want to test
 	#await play_level($venus_mars.make_easy())
 	#await simple_level3()
+	#level 0 -saturn
 	var rlevel
 	var custom_collection=[intro_level,simple_level1]
-	
+	await level0()
+	await saturn()
+
 	await play_level($tutorial)
 	
 	#level 1 -mercury
@@ -88,19 +121,32 @@ func random_simple(start_time=0):
 		intro_level(start_time)
 	else:
 		simple_level1(start_time)
+func saturn(start_time=0):
+	level_duration=50
+	print("begin tutorial")
+	var pl=self.planet_scene.instantiate()
+	pl.setplanet("saturn")
+	pl.on_screen.connect(react_to_planet)
+	pl.reshape(1.7)
+	generate_field(pl,Vector2(50,-self.screen_size.y),PI/2,30,0,0,start_time+5,1,Vector2(100,0),Vector2(0.9,1.1))
+	
 func mars_venus(start_time=0):
 	level_duration=5
-	generate_planet("venus" ,1.5,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/2,40,Vector2(100,0),Vector2(0.75,1.5))
-	generate_planet("mars" ,1.6,start_time+0,Vector2(1180,-self.screen_size.y/2-100),PI/2,30,Vector2(100,0),Vector2(0.75,1.5))
+	var venus=generate_planet("venus" ,1.5,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/2,40,Vector2(100,0),Vector2(0.75,1.5))
+	var mars=generate_planet("mars" ,1.6,start_time+0,Vector2(1180,-self.screen_size.y/2-100),PI/2,30,Vector2(100,0),Vector2(0.75,1.5))
+	mars.on_screen.connect(react_to_planet)
+	venus.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
 func Suerza(start_time=0):
 	level_duration=50
-	generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-900),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
+	var s=generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-900),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
+	s.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
 
 func earth(start_time=0):
 	level_duration=5
-	generate_planet("earth" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
+	var e=generate_planet("earth" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
+	e.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
 func simple_level2(start_time=0):
 	set_flip()
@@ -144,7 +190,8 @@ func simple_level4(start_time=0):
 	await get_tree().create_timer(level_duration).timeout
 func mercury(start_time=0):
 	level_duration=4
-	generate_planet("mercury" ,1.8,start_time+0,Vector2(X+400,-400),PI/2+PI/6,120,Vector2(100,100),Vector2(0.9,1.2))
+	var m=generate_planet("mercury" ,1.8,start_time+0,Vector2(X+400,-400),PI/2+PI/6,120,Vector2(100,100),Vector2(0.9,1.2))
+	m.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
 	
 func simple_level3(start_time=0):

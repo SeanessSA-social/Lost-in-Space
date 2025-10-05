@@ -124,16 +124,17 @@ script = ExtResource("1_6u7rb")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-14, 4)
+position = Vector2(-13.999998, 4)
 rotation = -1.6231562
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall"
 
 [node name="explode" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(49.852295, 118.77185)
 rotation = 2.3561945
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"off"
+animation = &"explode2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 2)
