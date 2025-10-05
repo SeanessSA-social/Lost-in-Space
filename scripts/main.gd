@@ -82,4 +82,7 @@ func _on_spaceship_crash() -> void:
 
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
 	print("succesful landing on planet ",planet_id," with ",current_lives," current lives") 
-	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")# Replace with function body.
+	if current_lives == 2:
+		get_tree().call_deferred("change_scene_to_file","res://scene/intro_scene.tscn")
+	else:
+		get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")# Replace with function body.

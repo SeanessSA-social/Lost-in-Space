@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_4j5ol"]
-[ext_resource type="Shader" path="res://assets/Textures/scroll_background.gdshader" id="3_lquwl"]
+[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/Textures/scroll_background.gdshader" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
 [ext_resource type="Texture2D" uid="uid://4q088qgb18dj" path="res://assets/Textures/Background_blue.png" id="7_tqoya"]

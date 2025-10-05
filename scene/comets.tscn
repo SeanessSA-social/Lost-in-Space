@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp48tk7ctl8s2"]
+[gd_scene load_steps=11 format=3 uid="uid://dp48tk7ctl8s2"]
 
 [ext_resource type="Script" uid="uid://s5wkpl15f5v2" path="res://scripts/comets.gd" id="1_6u7rb"]
 [ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_adq4h"]
 [ext_resource type="Texture2D" uid="uid://cbr44x2hefba5" path="res://assets/Textures/a_2.t.png" id="2_fanve"]
-[ext_resource type="Texture2D" uid="uid://brh70mt5eajwg" path="res://assets/Textures/free-explosion-transparent-pictures-6.png" id="3_2msnu"]
+[ext_resource type="Texture2D" uid="uid://c50aodo11762s" path="res://assets/Textures/Asteriod and Comets/Comet2 explosion.PNG" id="3_i6bdh"]
+[ext_resource type="Texture2D" uid="uid://bgxatqcewuc52" path="res://assets/Textures/Asteriod and Comets/Comet 1.PNG" id="4_i6bdh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -17,7 +18,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_2msnu")
+"texture": ExtResource("3_i6bdh")
 }],
 "loop": true,
 "name": &"explode2",
@@ -25,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_adq4h")
+"texture": ExtResource("4_i6bdh")
 }],
 "loop": true,
 "name": &"fall",
@@ -123,8 +124,8 @@ script = ExtResource("1_6u7rb")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 1)
-rotation = 2.3561945
+position = Vector2(-14, 4)
+rotation = -1.6231562
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall"
@@ -132,7 +133,7 @@ animation = &"fall"
 [node name="explode" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
 rotation = 2.3561945
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"fall2"
+animation = &"off"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 2)

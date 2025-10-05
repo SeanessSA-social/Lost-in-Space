@@ -155,7 +155,7 @@ _data = {
 &"planet_bump": SubResource("Animation_wkmid")
 }
 
-[node name="Spaceship" type="Area2D"]
+[node name="Spaceship" type="Area2D" groups=["player"]]
 collision_mask = 255
 script = ExtResource("1_dl81w")
 impulse = 1500

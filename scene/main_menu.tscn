@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ckktle1iwl6k6"]
 
 [ext_resource type="Script" uid="uid://66wah0su0cta" path="res://scripts/main_menu.gd" id="1_3er1b"]
-[ext_resource type="Shader" path="res://assets/Textures/scroll_Menu_background.gdshader" id="2_2fwvj"]
+[ext_resource type="Shader" uid="uid://cs5lalk43prjc" path="res://assets/Textures/scroll_Menu_background.gdshader" id="2_2fwvj"]
 [ext_resource type="Texture2D" uid="uid://dk2xavhi2mm76" path="res://assets/Textures/SpaceBackground_Suerza_2.png" id="2_hxu56"]
 [ext_resource type="AudioStream" uid="uid://bwj24mslo8b3w" path="res://assets/Audio/Yehezkel Raz - Ganymede.wav" id="4_0iwki"]
 [ext_resource type="FontFile" uid="uid://dnh52d7vp1wes" path="res://assets/Fonts/Transformers Movie.ttf" id="4_14wem"]

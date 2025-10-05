@@ -179,13 +179,14 @@ func	 start(pos):
 	in_intro=false
 	
 func got_hit():
-	
+
 	if invulnerable:
 		print("shield block")
 		return
 	
 	lives -= 1
 	emit_signal("lives_changed", lives)
+	_say_health_lost()
 	print("lives Left: ", lives)
 		
 	if lives <= 0:
@@ -194,6 +195,16 @@ func got_hit():
 		#recoil()
 		hit.emit()
 		recoil()
+
+
+func _say_health_lost() -> void:
+	var dlg := load("res://Dialogue/health_loss.dialogue")
+	if dlg == null:
+		push_error("could not load dialogue:res://Dialogue/health_loss.dialogue ")
+		
+	var balloon := DialogueManager.show_dialogue_balloon(dlg, "start")
+
+
 	
 func crashed():
 	
