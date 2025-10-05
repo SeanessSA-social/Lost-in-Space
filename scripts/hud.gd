@@ -1,8 +1,6 @@
 extends CanvasLayer
 #HUD only controls life display not life logic. removed death check and ending control.
 
-
-
 #@onready var lives_label: Label = $LivesLabel
 @onready var cards: Array[LifeCard] = [
 	$Cards/Card1 as LifeCard,
@@ -16,7 +14,7 @@ var placeholder_icon: Texture2D
 func _ready() -> void:
 	print("+++++++++++++++++")
 	placeholder_icon = load("res://assets/Textures/processor.png") as Texture2D # replace later with real PNGs
-	#placeholder_icon = load("res://assets/Textures/heart (3).png") as Texture2D # replace later with real PNGs
+ 
 	
 	#initialize captions and icons
 	cards[0].set_caption("Terraform")
@@ -43,25 +41,6 @@ func update_lives(current: int) -> void:
 			card.visible = true
 			card.scale = Vector2.ONE
 			card.modulate = Color(1,1,1,1)
-	# load a single placeholder icon
-	
-	# show hit feedback on the life that was just lost (if shrinking)
-	# lives go 3→2→1→0. We’ll remove from right to left for drama.
-	# First, play hit on the card that will be lost next (if any).
-	
-	#if current >= 0 and current < cards.size():
-		#var index_to_remove = clamp(current, 0, cards.size()-1)
-		#for i in range (cards.size()):
-			#if i >= current:
-				#if cards[i].visible:
-					#cards[i].play_hit_feedback()
-					#await get_tree().create_timer(0.05).timeout
-					#cards[i].play_lost_feedback()
-	#for i in range(current):
-		#if not cards[i].visible:
-			#cards[i].visible = true
-			#cards[i].scale = Vector2.ONE
-			#cards[i].modulate = Color(1,1,1,1)
 			
 
 func _on_spaceship_lives_changed(current_lives: int) -> void:

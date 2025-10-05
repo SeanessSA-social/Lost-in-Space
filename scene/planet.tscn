@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8mtrabrl6xg" path="res://scripts/planet.gd" id="1_ohpux"]
 [ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/Textures/Planets/earth.png" id="2_u71er"]
 [ext_resource type="Texture2D" uid="uid://d0g2t5hruvq0p" path="res://assets/Textures/Planets/neptune.png" id="2_vvgff"]
-[ext_resource type="Script" uid="uid://biewcqphg8mvc" path="res://scene/Planet_proximity.gd" id="2_y3myt"]
+[ext_resource type="Script" path="res://scene/Planet_proximity.gd" id="2_y3myt"]
 [ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
 [ext_resource type="Texture2D" uid="uid://d1cwc3unlvsgb" path="res://assets/Textures/Planets/Planet1.png" id="3_vvgff"]
 [ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b7ooxck6vcnm6" path="res://assets/Textures/Planets/saturn.png" id="8_x5iud"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
-radius = 157.38487
+radius = 157.385
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -83,7 +83,7 @@ script = ExtResource("1_ohpux")
 script = ExtResource("2_y3myt")
 
 [node name="Dialogue Collisions" type="CollisionShape2D" parent="Proximity"]
-rotation = 1.5027285
+rotation = 1.50273
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_u71er")
 
@@ -92,7 +92,7 @@ sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"mercury"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5027285
+rotation = 1.50273
 shape = SubResource("CircleShape2D_u71er")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
