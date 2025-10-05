@@ -131,7 +131,7 @@ func saturn(start_time=0):
 	generate_field(pl,Vector2(50,-self.screen_size.y),PI/2,30,0,0,start_time+5,1,Vector2(100,0),Vector2(0.9,1.1))
 	
 func mars_venus(start_time=0):
-	level_duration=5
+	level_duration=7
 	var venus=generate_planet("venus" ,1.5,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/2,40,Vector2(100,0),Vector2(0.75,1.5))
 	var mars=generate_planet("mars" ,1.6,start_time+0,Vector2(1180,-self.screen_size.y/2-100),PI/2,30,Vector2(100,0),Vector2(0.75,1.5))
 	mars.on_screen.connect(react_to_planet)
@@ -144,7 +144,7 @@ func Suerza(start_time=0):
 	await get_tree().create_timer(level_duration).timeout
 
 func earth(start_time=0):
-	level_duration=5
+	level_duration=8
 	var e=generate_planet("earth" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
 	e.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
@@ -189,7 +189,7 @@ func simple_level4(start_time=0):
 	
 	await get_tree().create_timer(level_duration).timeout
 func mercury(start_time=0):
-	level_duration=4
+	level_duration=7
 	var m=generate_planet("mercury" ,1.8,start_time+0,Vector2(X+400,-400),PI/2+PI/6,120,Vector2(100,100),Vector2(0.9,1.2))
 	m.on_screen.connect(react_to_planet)
 	await get_tree().create_timer(level_duration).timeout
